@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-macroquad = { path = "../macroquad" }
+macroquad = "0.3.0"
 resvg = "0.28.0"
 rand = "0.8.5"
 getrandom = { version = "0.2", features = ["js"] }
