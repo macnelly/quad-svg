@@ -1,10 +1,14 @@
-use macroquad::{prelude::*, texture::draw_texture, window::{clear_background, next_frame, screen_width, screen_height}};
+use macroquad::{
+    prelude::*,
+    texture::draw_texture,
+    window::{clear_background, next_frame, screen_height, screen_width},
+};
 
-struct Position{
-   x: f32,
-   y: f32,
-   forward: bool,
-   speed: f32,
+struct Position {
+    x: f32,
+    y: f32,
+    forward: bool,
+    speed: f32,
 }
 #[macroquad::main("ferris in svg")]
 async fn main() {
@@ -49,39 +53,32 @@ async fn main() {
  </g></svg>";
     let texture = quad_svg::svg_to_texture(&svg_data);
     let mut positions: Vec<Position> = vec![];
-    for _i in 0..50{
-      positions.push(Position { 
-         x: rand::gen_range(0.0, screen_width()-texture.width()),
-         y: rand::gen_range(0.0, screen_height()-texture.height()),
-         forward: rand::gen_range(0,2) == 1,
-         speed: rand::gen_range(0.5, 5.0),
-      })
+    for _i in 0..50 {
+        positions.push(Position {
+            x: rand::gen_range(0.0, screen_width() - texture.width()),
+            y: rand::gen_range(0.0, screen_height() - texture.height()),
+            forward: rand::gen_range(0, 2) == 1,
+            speed: rand::gen_range(0.5, 5.0),
+        })
     }
     loop {
         clear_background(LIGHTGRAY);
         for i in 0..positions.len() {
-            draw_texture(
-               texture,
-               positions[i].x,
-               positions[i].y,
-               GRAY,
-            );
+            draw_texture(texture, positions[i].x, positions[i].y, GRAY);
             if positions[i].forward {
-               positions[i].x += positions[i].speed
-            }
-            else {
-               positions[i].x -= positions[i].speed
+                positions[i].x += positions[i].speed
+            } else {
+                positions[i].x -= positions[i].speed
             }
             if positions[i].x + texture.width() > screen_width() {
-               positions[i].x = screen_width() - texture.width();
-               positions[i].forward = false;
+                positions[i].x = screen_width() - texture.width();
+                positions[i].forward = false;
             }
             if positions[i].x < 0.0 {
-               positions[i].x = 0.0;
-               positions[i].forward = true;
+                positions[i].x = 0.0;
+                positions[i].forward = true;
             }
         }
         next_frame().await
-}
-
+    }
 }
