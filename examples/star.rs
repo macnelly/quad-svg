@@ -10,7 +10,7 @@ struct Position {
     forward: bool,
     speed: f32,
 }
-#[macroquad::main("ferris in svg")]
+#[macroquad::main("star in svg")]
 async fn main() {
     let svg_data = "<svg
     width=\"194\"
