@@ -51,7 +51,7 @@ async fn main() {
       d=\"m 59.874768,44.889364 c -0.180529,2.490275 -4.437976,3.807787 -5.776051,0.395645 z\"
       id=\"path27676\" />
  </g></svg>";
-    let texture = quad_svg::svg_to_texture(&svg_data);
+    let texture = quad_svg::svg_to_texture(&svg_data, &quad_svg::Transform::default()).unwrap();
     let mut positions: Vec<Position> = vec![];
     for _i in 0..50 {
         positions.push(Position {

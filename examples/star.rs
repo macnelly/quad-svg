@@ -42,7 +42,10 @@ async fn main() {
             y=\"36.092587\">Text</tspan></text>
      </g>
  </svg>";
-    let texture = quad_svg::svg_to_texture(&svg_data);
+    let texture = match quad_svg::svg_to_texture(&svg_data, &quad_svg::Transform::default()) {
+        Ok(texture) => texture,
+        Err(err) => panic!("{}", err)
+    };
     let mut positions: Vec<Position> = vec![];
     for _i in 0..100 {
         positions.push(Position {
